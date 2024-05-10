@@ -6,7 +6,12 @@ export default function Landing() {
   return (
     <div className='grid place-items-center'>
       {/*se utiliza el componente Image para un mejor renderizado de imagen*/}
-      <Image src={logoStarWars} alt='logo star-wars' width={500} height={300} />
+      <Image
+        src={logoStarWars}
+        alt='logo star-wars'
+        width={'auto'}
+        height={300}
+      />
       <div className='text-center flex flex-wrap flex-col place-items-center border-2 border-white rounded-lg w-4/5 phone:w-full tablet:w-3/4 h-24 m-8 bg-slate-900'>
         <h2 className='text-xl mt-1'>
           View about to <i>films</i>
