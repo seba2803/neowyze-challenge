@@ -1,13 +1,12 @@
 'use client';
 import Image from 'next/image';
-import fotoFilm from '../../../public/foto-film.jpg';
+import fotoFilm from '../../../../public/foto-film.jpg';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function CardFilm(props) {
   //? extraigo la ruta en la que se encuentra el cliente
   const PathName = usePathname();
-  console.log(props.film);
   return (
     <div className='flex flex-col place-items-center bg-slate-800 w-52 h-fit p-2 border-4 border-slate-700 rounded-xl text-wrap'>
       <h2>Name: {props.film.titulo}</h2>

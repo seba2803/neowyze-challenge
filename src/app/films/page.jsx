@@ -1,4 +1,4 @@
-import CardFilm from '@/pages/components/CardFilm';
+import CardFilm from '@/pages/components/films/CardFilm';
 import { getAllFilms } from '@/services/services';
 
 export default async function Films() {
