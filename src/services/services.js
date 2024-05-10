@@ -1,3 +1,8 @@
+export const state = {
+  Films: [],
+  People: [],
+};
+
 export const getAllFilms = async () => {
   const result = await fetch('https://swapi.dev/api/films');
   const films = await result.json();
@@ -10,5 +15,5 @@ export const getAllFilms = async () => {
       personajes: characters,
     })
   );
-  return formatFilms;
+  state.Films = [formatFilms];
 };
