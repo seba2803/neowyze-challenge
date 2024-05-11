@@ -11,7 +11,7 @@ export default async function Films() {
       <Suspense fallback={<div>cargando...</div>}>
         {state.Films.length &&
           state.Films[0].map((film, index) => {
-            return <CardFilm key={index} film={film} />;
+            return <CardFilm key={index} film={film} Id={index} />;
           })}
       </Suspense>
     </div>
