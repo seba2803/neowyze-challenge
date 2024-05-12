@@ -1,19 +1,14 @@
-import CardFilm from '@/pages/components/films/CardFilm';
-import { getAllFilms, state } from '@/services/services';
+import PageFilms from '@/pages/PageFilms';
 import { Suspense } from 'react';
+import Link from 'next/link';
 
-export default async function Films() {
-  await getAllFilms();
-
+export default function Films() {
   return (
-    <div className='grid grid-cols-3 phone:grid-cols-1 tablet:grid-cols-2 gap-4 m-3 place-items-center'>
-      {/* Suspense suspende el componente asyncrono y en su lugar muestra el componente de carga que deseemos mostrar */}
-      <Suspense fallback={<div>cargando...</div>}>
-        {state.Films.length &&
-          state.Films[0].map((film, index) => {
-            return <CardFilm key={index} film={film} Id={index} />;
-          })}
-      </Suspense>
-    </div>
+    <Suspense fallback={<div>Cargando pagina...</div>}>
+      <Link href={'/'}>
+        <button>Volver</button>
+      </Link>
+      <PageFilms />
+    </Suspense>
   );
 }

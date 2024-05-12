@@ -1,5 +1,14 @@
-import FilmDetail from '@/pages/components/films/FilmsDetail';
+import PageFilmDetail from '@/pages/PageFilmDetail';
+import { Suspense } from 'react';
+import Link from 'next/link';
 
 export default function PageDetail() {
-  return <FilmDetail />;
+  return (
+    <Suspense fallback={<div>Cargando detalle...</div>}>
+      <Link href={'/films'}>
+        <button>Regresar...</button>
+      </Link>
+      <PageFilmDetail />
+    </Suspense>
+  );
 }
