@@ -11,7 +11,11 @@ export default function CardFilm(props) {
   const router = useRouter();
 
   const handleClick = () => {
+    //*ejecuto la peticion para tener un film en concreto
     getFilm(props.Id + 1);
+    //* guardo el id del film en session storage para poder obtenerlo mas adelante
+    window.sessionStorage.setItem('Id', props.Id + 1);
+    //? espero un tiempo a que se haga la peticion correctamente y luego se redirecciona
     setTimeout(() => {
       router.push('/films/detail');
     }, 500);
@@ -24,7 +28,8 @@ export default function CardFilm(props) {
         src={fotoFilm}
         alt='foto de peliula'
         width={180}
-        height={80}
+        height={'auto'}
+        priority={true}
         className='rounded-xl my-2'
       />
       <h2>Episode Number: {props.film.episodio}</h2>
@@ -37,12 +42,9 @@ export default function CardFilm(props) {
           View More
         </button>
       )}
-      {/*si existen las propiedades director y personajes que vienen por props, que se muestren */}
+      {/*si existe la propiedad director, que se muestren */}
       {props.film.director && PathName === '/films/detail' && (
         <h2>Director: {props.film.director}</h2>
-      )}
-      {props.film.personajes && PathName === '/films/detail' && (
-        <h2>personajes...</h2>
       )}
     </div>
   );

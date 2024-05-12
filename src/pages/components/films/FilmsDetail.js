@@ -1,20 +1,32 @@
 'use client';
 import { Suspense, useEffect } from 'react';
-import { state, clearFilm } from '@/services/services';
+import { state, getFilm, getPeople } from '@/services/services';
 import CardFilm from './CardFilm';
+import { useRouter } from 'next/navigation';
 
 export default function FilmDetail() {
+  const router = useRouter();
+
   useEffect(() => {
-    //* cuando el componente se desmonte se limpia el estado Film
-    return () => {
-      clearFilm();
+    //* extraigo el id de session storage
+    const id = window.sessionStorage.getItem('Id');
+    //? funcion que ejecuta los metodos de fetching de datos
+    const fetchData = async () => {
+      //* ejecuto los metodos para obtener los datos de la api
+      await getFilm(id);
+      await getPeople();
+      // console.log('dentro del fetch', state.People);
     };
-  }, []);
-  return (
-    <div>
-      <Suspense fallback={<div>Cargando...</div>}>
-        {state.Film.director && <CardFilm film={state.Film} />}
-      </Suspense>
-    </div>
-  );
+    fetchData();
+    //? se hace un redireccionamiento con delay para darle tiempo a la llegada de lainfo
+    setTimeout(() => {
+      router.push('/films');
+    }, 100);
+    setTimeout(() => {
+      router.push('/films/detail');
+    }, 100);
+    console.log('fuera del fetch', state.People);
+  }, [getFilm, getPeople]);
+
+  return <div>{state.Film.director && <CardFilm film={state.Film} />}</div>;
 }
