@@ -15,17 +15,17 @@ export default function FilmDetail() {
       //* ejecuto los metodos para obtener los datos de la api
       await getFilm(id);
       await getPeople();
-      // console.log('dentro del fetch', state.People);
     };
     fetchData();
-    //? se hace un redireccionamiento con delay para darle tiempo a la llegada de lainfo
+    //? se hace un redireccionamiento con delay para darle tiempo a la llegada de la info
     setTimeout(() => {
-      router.push('/films');
+      state.People.length && router.push('/films');
     }, 100);
     setTimeout(() => {
+      window.localStorage.setItem('People', JSON.stringify(state.People));
       router.push('/films/detail');
     }, 100);
-    console.log('fuera del fetch', state.People);
+    // console.log('fuera del fetch', state.People);
   }, [getFilm, getPeople]);
 
   return <div>{state.Film.director && <CardFilm film={state.Film} />}</div>;
