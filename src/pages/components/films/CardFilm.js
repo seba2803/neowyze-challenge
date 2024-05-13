@@ -10,15 +10,13 @@ export default function CardFilm(props) {
   const PathName = usePathname();
   const router = useRouter();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     //*ejecuto la peticion para tener un film en concreto
-    getFilm(props.Id + 1);
+    await getFilm(props.Id + 1);
     //* guardo el id del film en session storage para poder obtenerlo mas adelante
     window.sessionStorage.setItem('Id', props.Id + 1);
     //? espero un tiempo a que se haga la peticion correctamente y luego se redirecciona
-    setTimeout(() => {
-      router.push('/films/detail');
-    }, 500);
+    router.push('/films/detail');
   };
 
   return (
@@ -29,7 +27,6 @@ export default function CardFilm(props) {
         alt='foto de peliula'
         width={180}
         height={'auto'}
-        priority={true}
         className='rounded-xl my-2'
       />
       <h2>Episode Number: {props.film.episodio}</h2>
