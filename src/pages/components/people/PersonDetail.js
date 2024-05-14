@@ -6,12 +6,12 @@ import { Suspense, useEffect, useState } from 'react';
 
 export default function PersonDetail() {
   const [person, setPerson] = useState({});
+  const invalidValues = ['unknown', 'n/a'];
   useEffect(() => {
     if (typeof window !== undefined) {
       (async () => {
         if (!state.Person.nombre) {
           const id = window.sessionStorage.getItem('Person_id');
-          console.log('id', id);
           await getPerson(id);
         }
       })().then(() => setPerson({ ...state.Person }));
@@ -20,7 +20,6 @@ export default function PersonDetail() {
       setPerson({});
     };
   }, [getPerson]);
-  console.log(person);
 
   return (
     <Suspense fallback={<div>Cargando...</div>}>
@@ -33,12 +32,22 @@ export default function PersonDetail() {
         />
         <ul>
           <li>Name: {person.nombre}</li>
-          <li>Eye color: {person.color_ojos}</li>
-          <li>Birth year: {person.cumpleano}</li>
-          <li>Hair color: {person.color_pelo}</li>
-          <li>Height: {person.altura}</li>
-          <li>Skin color: {person.color_piel}</li>
-          <li>Mass: {person.masa}</li>
+          {!invalidValues.includes(person.color_ojos) && (
+            <li>Eye color: {person.color_ojos}</li>
+          )}
+          {!invalidValues.includes(person.cumpleano) && (
+            <li>Birth year: {person.cumpleano}</li>
+          )}
+          {!invalidValues.includes(person.color_pelo) && (
+            <li>Hair color: {person.color_pelo}</li>
+          )}
+          {!invalidValues.includes(person.altura) && (
+            <li>Height: {person.altura}</li>
+          )}
+          {!invalidValues.includes(person.color_piel) && (
+            <li>Skin color: {person.color_piel}</li>
+          )}
+          {!invalidValues.includes(person.masa) && <li>Mass: {person.masa}</li>}
         </ul>
       </div>
     </Suspense>

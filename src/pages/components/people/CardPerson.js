@@ -8,8 +8,10 @@ import { getPerson } from '@/services/services';
 export default function CardPerson(props) {
   const PathName = usePathname();
   const router = useRouter();
+  const invalidValues = ['unknown', 'n/a'];
+  //* manejador del evento al clikear boton
   const handleClick = async () => {
-    if (props.index && typeof window !== undefined) {
+    if (props.index >= 0 && typeof window !== undefined) {
       window.sessionStorage.setItem('Person_id', props.index + 1);
       await getPerson(props.index + 1);
       router.push('/people/detail');
@@ -36,8 +38,14 @@ export default function CardPerson(props) {
         View More
       </button>
 
-      {PathName === '/people' && <h2>Eye color: {props.person.color_ojos}</h2>}
-      {PathName === '/people' && <h2>Gender: {props.person.genero}</h2>}
+      {PathName === '/people' &&
+        !invalidValues.includes(props.person.color_ojos) && (
+          <h2>Eye color: {props.person.color_ojos}</h2>
+        )}
+      {PathName === '/people' &&
+        !invalidValues.includes(props.person.genero) && (
+          <h2>Gender: {props.person.genero}</h2>
+        )}
     </div>
   );
 }
