@@ -1,6 +1,6 @@
 import { state } from '@/services/services';
 //? extrae todas las personas que aparecen en el Film
-export function getPeopleFromFilmg(people) {
+export function getPeopleFromFilm(people) {
   //* si en el estado Film posee la propiedad personajes(un Array) que lo mapee
   if (state.Film.personajes) {
     //* extraigo los indices de las url de los personajes

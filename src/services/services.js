@@ -3,6 +3,7 @@ export const state = {
   Films: [],
   Film: {},
   People: [],
+  FilterPeople: [],
   Person: {},
 };
 
@@ -57,7 +58,7 @@ export const getPeople = async () => {
     );
   }
   //* resuleve todas las promesas pendientes de promisePeople usando Promise all
-  Promise.all(promisePeople)
+  await Promise.all(promisePeople)
     .then((value) => {
       //? cargo todos los datos en el estado People
       state.People = value.flat();
@@ -99,7 +100,36 @@ async function fetchingData(url) {
 }
 
 //* otiene la persona para verla a detalle
-export const getPerson = async () => {
+export const getPerson = async (id) => {
   try {
-  } catch (error) {}
+    const result = await fetch(`https://swapi.dev/api/people/${id}`);
+    const person = await result.json();
+    const {
+      name: nombre,
+      height: altura,
+      mass: masa,
+      hair_color: color_pelo,
+      skin_color: color_piel,
+      eye_color: color_ojos,
+      birth_year: cumpleano,
+      gender: genero,
+    } = person;
+    state.Person = {
+      nombre,
+      altura,
+      masa,
+      color_pelo,
+      color_piel,
+      color_ojos,
+      cumpleano,
+      genero,
+    };
+  } catch (error) {
+    console.log({ error: error.message });
+  }
+};
+
+//* carga la copia del estado People
+export const chargeStatePeople = () => {
+  state.FilterPeople = [...state.People];
 };

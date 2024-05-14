@@ -1,3 +1,9 @@
+import PagePeople from '@/pages/PagePeople';
+import { Suspense } from 'react';
 export default function People() {
-  return <h1>ruta people</h1>;
+  return (
+    <Suspense fallback={<div>Cargando</div>}>
+      <PagePeople />
+    </Suspense>
+  );
 }
