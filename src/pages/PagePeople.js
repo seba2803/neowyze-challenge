@@ -40,6 +40,20 @@ export default function PagePeople() {
     ]);
   };
 
+  const handleFilterAlphabet = (event) => {
+    if (event.target.value === 'A-Z') {
+      setPeople([
+        ...state.FilterPeople.sort((a, b) => a.nombre.localeCompare(b.nombre)),
+      ]);
+      return;
+    }
+    if (event.target.value === 'Z-A')
+      setPeople([
+        ...state.FilterPeople.sort((a, b) => -a.nombre.localeCompare(b.nombre)),
+      ]);
+    return;
+  };
+
   return (
     <div>
       {!people.length ? (
@@ -76,6 +90,14 @@ export default function PagePeople() {
               <option value={'female'}>female</option>
               <option value={'none'}>none</option>
               <option value={'hermaphrodite'}>hermaphrodite</option>
+            </select>
+            <select
+              onChange={handleFilterAlphabet}
+              className='text-black mx-2 w-28'
+            >
+              <option>sort</option>
+              <option value={'A-Z'}>A-Z</option>
+              <option value={'Z-A'}>Z-A</option>
             </select>
           </div>
           <div className='grid grid-cols-3 place-items-center gap-5 phone:grid-cols-1 tablet:grid-cols-2 h-96 w-4/5 m-5 p-1 bg-slate-900 rounded-2xl border-2 border-gray-500 overflow-y-scroll'>

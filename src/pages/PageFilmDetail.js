@@ -33,11 +33,7 @@ export default function PageFilmDetail() {
 
   return (
     <div className='grid grid-cols-2 gap-x-3 phone:grid-cols-1 tablet:grid-cols-2 place-items-center place-content-center bg-slate-900 border-2 border-slate-400 rounded-2xl p-2 mt-12 mx-5'>
-      {!peopleFilms.length || !state.Film.director ? (
-        <LoadCardFilm />
-      ) : (
-        <FilmsDetail />
-      )}
+      <FilmsDetail />
 
       <div className='grid grid-flow-col-dense place-items-center  phone:grid-cols-1 tablet:grid-cols-1'>
         {Array.isArray(peopleFilms) && peopleFilms.length ? (
