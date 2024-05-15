@@ -16,12 +16,13 @@ export function getPeopleFromFilm(people) {
       );
     });
     const peopleFromFilm = [];
-    //* mientras el array de indices tenga elementos
-    //* voy a llenar a peopleFromFilm de todos los objetos que hay en el array people
-    //* que concuerden con el indice que se extrajo de las url
-    while (indexes.length) {
-      peopleFromFilm.push(people[indexes.pop()]);
-    }
+    //* voy a llenar a peopleFromFilm de todos los objetos que hay en el array people que llega por parametro
+    //* que concuerden con el indice que se extrajo de las url con alguno de los id de cada persona
+    people.filter((person) => {
+      if (person.id in indexes) {
+        peopleFromFilm.push(person);
+      }
+    });
     return peopleFromFilm;
   }
 }

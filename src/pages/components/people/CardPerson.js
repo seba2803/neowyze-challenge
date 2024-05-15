@@ -11,12 +11,10 @@ export default function CardPerson(props) {
   const invalidValues = ['unknown', 'n/a'];
   //* manejador del evento al clikear boton
   const handleClick = async () => {
-    if (props.index >= 0 && typeof window !== undefined) {
-      window.sessionStorage.setItem('Person_id', props.index + 1);
-      await getPerson(props.index + 1);
+    if (typeof window !== undefined) {
+      window.sessionStorage.setItem('Person_id', props.person.id);
+      await getPerson(props.person.id);
       router.push('/people/detail');
-    } else {
-      router.push('/people');
     }
   };
 

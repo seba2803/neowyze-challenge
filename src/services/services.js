@@ -61,7 +61,32 @@ export const getPeople = async () => {
   await Promise.all(promisePeople)
     .then((value) => {
       //? cargo todos los datos en el estado People
-      state.People = value.flat();
+      const flatValue = value.flat();
+      state.People = flatValue.map(
+        (
+          {
+            altura,
+            color_ojos,
+            color_pelo,
+            color_piel,
+            cumpleano,
+            genero,
+            masa,
+            nombre,
+          },
+          index
+        ) => ({
+          id: index >= 16 ? (index += 2) : (index += 1),
+          nombre,
+          masa,
+          genero,
+          cumpleano,
+          color_piel,
+          color_ojos,
+          color_pelo,
+          altura,
+        })
+      );
     })
     .catch((error) => console.log({ error: error.message }));
 };
@@ -89,7 +114,7 @@ async function fetchingData(url) {
         color_pelo: hair_color,
         color_piel: skin_color,
         color_ojos: eye_color,
-        compleano: birth_year,
+        cumpleano: birth_year,
         genero: gender,
       })
     );
@@ -131,5 +156,5 @@ export const getPerson = async (id) => {
 
 //* carga la copia del estado People
 export const chargeStatePeople = () => {
-  state.FilterPeople = [...state.People];
+  return (state.FilterPeople = [...state.People]);
 };
